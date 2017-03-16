@@ -1,0 +1,106 @@
+@import 'general';
+.top-control {
+	background: #EA0606;
+	color: white;
+	height: 5rem;
+	padding: 1rem .5rem 0 1rem;
+	.logo {
+		vertical-align: top;
+		display: inline-block;
+		width: 4rem;
+		height: 4rem;
+		font-size: 3rem;
+	}
+	input {
+		vertical-align: top;
+		width: calc(100% - 10.5rem);
+		height: 4rem;
+		font-size: 2rem;
+		text-indent: 2rem;
+		border: 0;
+		outline: 0;
+		border-radius: 5px;
+	}
+	.play-flag {
+		vertical-align: top;
+		margin-left: 1.5rem;
+		display: inline-block;
+		width: 4rem;
+		height: 4rem;
+		cursor: pointer;
+		span {
+			width: .5rem;
+			background: white;
+			display: inline-block;	
+			vertical-align: top;	
+		}
+		span:first-child {
+			height: 2rem;
+		}
+		span:nth-child(2) {
+			height: 3.5rem;
+		}
+		span:nth-child(3) {
+			height: 2.5rem;
+		}
+		span:last-child {
+			height: 3rem;
+		}
+		.active_1 {
+			animation: stretch_1 .6s linear infinite;
+		}
+		.active_2 {
+			animation: stretch_2 .6s linear infinite;
+		}
+		.active_3 {
+			animation: stretch_3 .6s linear infinite;
+		}
+		.active_4 {
+			animation: stretch_4 .6s linear infinite;
+		}
+	}
+}
+nav {
+	background: white;
+	ul {
+		font-size: 2.5rem;
+		line-height: 5rem;
+		height: 5rem;
+		@include flexbox();
+		justify-content: space-between;	
+		li {
+			cursor: pointer;
+			list-style: none;
+			@include flex(1 1 auto);
+			text-align: center;
+		}	
+		.active {
+			color: #EA0606;
+			border-bottom: .5rem solid #EA0606;
+		}
+	}
+}
+.bottom-control {
+	background: rgba(0, 0, 0, 1);
+	color: #828282;
+	@include flexbox();
+	justify-content: space-between;
+	flex-flow: row nowrap;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	div {
+		@include flexbox();
+		@include flex(1 1 auto);
+		padding: 1rem 0;
+		flex-direction: column;
+		// border: 1px solid #CCCCCC;
+		text-align: center;
+		font-size: 3rem;
+	}
+	.active {
+		color: white;
+	}
+}

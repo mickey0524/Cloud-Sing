@@ -1,0 +1,43 @@
+@import 'general';
+
+#album {
+	padding: 1rem;
+	padding-left: 0;
+	h3 {
+		font-size: 2rem;
+		margin: 1rem 0 2rem 1rem;
+		padding-left: 1rem;
+		border-left: .4rem solid #EA0606;
+	}
+	.album-list {
+		max-height: 82rem;
+		overflow: scroll;
+		width: 100%;
+		display: block;
+		@include flexbox();
+		flex-flow: row wrap;
+		.album-item {
+			@include flex(1 1 48%);
+			margin-left: 1rem;
+			margin-bottom: 2rem;
+			img {
+				width: 100%;
+			}
+			p {
+				font-size: 3rem;
+			}
+		}
+	}
+}
+
+@media only screen and (min-device-width: 768px) {
+	.album-list {
+		height: 56rem;
+	}
+}
+
+@media only screen and (min-device-width: 1024px) {
+	.album-list {
+		height: 60rem;
+	}
+}

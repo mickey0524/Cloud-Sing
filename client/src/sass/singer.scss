@@ -1,0 +1,42 @@
+@import 'general';
+#singer {
+	padding: 1rem;
+	.singer-list {
+		@include flexbox();
+		flex-direction: column;
+		max-height: 88rem;
+		overflow: scroll;
+		.singer-item {
+			margin: 0 1rem;
+			padding: 1rem 0;
+			height: 9rem;
+			border-bottom: .2rem solid #CCCCCC;
+			@include flex(1 0 auto);
+			@include flexbox();
+			position: relative;
+			align-items: center;
+			p {
+				margin-left: 4rem;
+				font-size: 2.5rem;
+			}
+			span {
+				position: absolute;
+				right: 2rem;
+				font-size: 2rem;
+				color: #9F9F9F;
+			}
+		}
+	}
+}
+
+@media only screen and (min-device-width: 768px) {
+	.singer-list {
+		height: 60rem;
+	}
+}
+
+@media only screen and (min-device-width: 1024px) {
+	.singer-list {
+		height: 64.5rem;
+	}
+}

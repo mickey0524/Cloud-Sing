@@ -1,0 +1,54 @@
+@import 'general';
+
+#playlist {
+	padding: 1rem;
+	padding-left: 0;
+	h3 {
+		font-size: 2rem;
+		margin: 1rem 0 2rem 1rem;
+		padding-left: 1rem;
+		border-left: .4rem solid #EA0606;
+	}
+	.playlist-list {
+		max-height: 82rem;
+		overflow: scroll;
+		width: 100%;
+		display: block;
+		@include flexbox();
+		flex-flow: row wrap;
+		.list-item {
+			@include flex(1 1 48%);
+			margin-left: 1rem;
+			margin-bottom: 2rem;
+			.img {
+				width: 100%;
+				position: relative;
+				img {
+					width: 100%;
+				}
+				.author {
+					font-size: 2rem;
+					color: white;
+					position: absolute;
+					left: 1rem;
+					bottom: 1rem;
+				}
+			}
+			.name {
+				font-size: 2.2rem;
+			}
+		}
+	}
+}
+
+@media only screen and (min-device-width: 768px) {
+	.playlist-list {
+		height: 56rem;
+	}
+}
+
+@media only screen and (min-device-width: 1024px) {
+	.playlist-list {
+		height: 60rem;
+	}
+}
