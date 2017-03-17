@@ -1,22 +1,17 @@
 <template>
-    <div id="app">
-        <Index></Index>
-    </div>
+    <router-view></router-view>
 </template>
 
 <script>
-    import Index from './Index.vue'
     export default {
         name: 'app',
-        components: {
-            Index
-        }
     }
 </script>
 
 
 <style>
     @import url("../css/animate.css");
+    @import url("../css/font-awesome.min.css");
     * {
         margin: 0;
         padding: 0;

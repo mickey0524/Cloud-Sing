@@ -1,0 +1,16 @@
+#messageBox {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 15rem;
+	height: 5rem;
+	background: black;
+	border-radius: 1rem;
+	text-align: center;
+	line-height: 5rem;
+	p {
+		font-size: 2rem;
+		color: #D3D3D3;
+	}
+}

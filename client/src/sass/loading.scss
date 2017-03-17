@@ -1,0 +1,29 @@
+@import 'general';
+
+#loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 15rem;
+	height: 15rem;
+	background: #4F4F4F;
+	border-radius: 1rem;
+	@include flexbox();
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	.loading-spin {
+		width: 30%;
+		height: 30%;
+		margin-bottom: 2rem;
+		border: .3rem solid #D3D3D3;
+		border-radius: 50%;
+		border-right-color: transparent;
+		animation: loading-spin 1s linear infinite;
+	}
+	p {
+		font-size: 2rem;
+		color: #D3D3D3;
+	}
+}
