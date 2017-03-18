@@ -1,3 +1,6 @@
+/**
+ * 每秒更改当前时间
+ */
 exports.changeNowtime = function(time) {
 	time = time.split(':');
 	var minute = parseInt(time[0]);
@@ -7,21 +10,23 @@ exports.changeNowtime = function(time) {
 		second = 0;
 		minute += 1;
 	}
-	if(second <= 9) {
-		second = '0' + String(second);
-	}
-	if(minute <= 9) {
-		minute = '0' + String(minute);
-	}
+	second = addZero(second);
+	minute = addZero(minute);
 	return minute + ':' + second;
 }
 
+/**
+ * 移动进度条(45是因为总进度条是45rem)
+ */
 exports.calDistance = function(nowTime, allTime) {
 	allTime = changeTimeFormat(allTime);
 	nowTime = changeTimeFormat(nowTime);
 	return nowTime / allTime * 45;
 }
 
+/**
+ * 计算歌词需要移动的距离
+ */
 exports.lyricMove = function(timeArray, nowTime) {
 	//console.log(timeArray);
 	var distance = 0;
@@ -33,6 +38,23 @@ exports.lyricMove = function(timeArray, nowTime) {
 	}
 	distance = (distance > 0) ? distance - 4.2 : 0;
 	return distance;
+}
+
+/**
+ * 从Home页面切换到Play页面的时候，记录当前歌曲时间
+ */
+exports.getNowTime = function(second) {
+	second = Math.round(second);
+	var minute = addZero(parseInt(second / 60));
+	second = addZero(second % 60);
+	return minute + ':' + second;
+}
+
+/**
+ * 给数字加上前导零
+ */
+function addZero(num) {
+	return (num <= 9) ? '0' + num : num;
 }
 
 function changeTimeFormat(time) {

@@ -1,8 +1,7 @@
 <template>
-	<!-- <Home></Home> -->
-	<!-- <Detail></Detail> -->
-	<!-- <Play></Play> -->
-	<router-view></router-view>
+    <transition enter-active-class="animated fadeIn" mode="out-in">
+        <router-view></router-view>
+    </transition>
 </template>
 
 <script>
@@ -18,6 +17,6 @@
 	}
 </script>
 
-<style lang="sass" scoped>
-	@import url('../css/font-awesome.min.css');
+<style>
+	
 </style>

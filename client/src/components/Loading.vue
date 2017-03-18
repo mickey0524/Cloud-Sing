@@ -1,8 +1,10 @@
 <template>
-	<div id="loading">
-		<div class="loading-spin"></div>
-		<p>Loading...</p>
-	</div>
+	<transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+		<div id="loading">
+			<div class="loading-spin"></div>
+			<p>Loading...</p>
+		</div>
+	</transition>
 </template>
 
 <script>

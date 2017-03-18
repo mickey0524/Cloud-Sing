@@ -4,7 +4,7 @@
 			<img :src="cover" class="blur-background">
 			<!-- <div class="mask"></div> -->
 			<div class="top-control">
-				<i class="fa fa-angle-left" aria-hidden="true"></i>
+				<i class="fa fa-angle-left" aria-hidden="true" @click="$router.go(-1)"></i>
 				<span>歌单</span>
 				<div class="play-flag">
 					<span class="active_1"></span>

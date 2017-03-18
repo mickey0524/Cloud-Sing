@@ -1,10 +1,24 @@
 <template>
-    <router-view></router-view>
+    <div id="app">
+        <audio :src="songAddress"></audio>
+        <transition enter-active-class="animated fadeIn" mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
 </template>
 
 <script>
     export default {
         name: 'app',
+        mounted: function() {
+            document.getElementsByTagName('audio')[0].play();
+            this.$store.commit('beginPlay');
+        },
+        data: function() {
+            return {
+                songAddress: this.$store.state.audio.playList[0].songAddress
+            }
+        }
     }
 </script>
 
@@ -22,5 +36,5 @@
         text-decoration:none;
     }
 
-    ::-webkit-scrollbar{width: 0;}
+    ::-webkit-scrollbar{ width: 0; }   
 </style>

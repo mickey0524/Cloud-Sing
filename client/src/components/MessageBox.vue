@@ -1,16 +1,19 @@
 <template>
-	<div id="messageBox">
-		<p>{{ message }}</p>
-	</div>
+	<transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+		<div id="messageBox">
+			<p>{{ mes }}</p>
+		</div>
+	</transition>
 </template>
 
 <script>
 	export default {
-		data: () => {
-			return {
-				message : '单曲循环'
-			}
-		}
+		props: ['mes']
+		// data: () => {
+		// 	return {
+		// 		mes : this.message 
+		// 	}
+		// }
 	}
 </script>
 

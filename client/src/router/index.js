@@ -14,19 +14,25 @@ import Album from '../components/Album.vue'
 export default new VueRouter({
 	mode: 'history',
 	routes: [
-		{ 
-			path: '', 
-			component: Home,
-		    children: [
-		  		{ path: '', component: Search },
-		  		{ path: 'playlist', component: Playlist },
-		  		{ path: 'singer', component: Singer },
-		  		{ path: 'album', component: Album }
-		  	]
-		},
-		{ path: '/play', component: Play },
-		{ path: '/detail', component: Detail },
-		{ path: '*', redirect: '/home' }
+		// {
+		// 	path: '',
+		// 	component: Index,
+		// 	children: [
+				{ 
+					path: '', 
+					component: Home,
+				    children: [
+				  		{ path: '', component: Search },
+				  		{ path: 'playlist', component: Playlist },
+				  		{ path: 'singer', component: Singer },
+				  		{ path: 'album', component: Album }
+				  	]
+				},
+				{ path: '/play', component: Play },
+				{ path: '/detail', component: Detail },
+				{ path: '*', redirect: '/home' }
+			// ]
+		// }
 	],
 	scrollBehavior: (to, from, savedPosition) => ({ x: 0, y: 0 })
 });

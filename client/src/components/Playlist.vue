@@ -2,7 +2,7 @@
 	<div id="playlist">
 		<h3>全部歌单</h3>
 		<div class="playlist-list">
-			<div class="list-item" v-for="list in playList">
+			<div class="list-item" v-for="list in playList" @click="$router.push('/detail')">
 				<div class="img">
 					<img :src="list.cover">
 					<p class="author"><i class="fa fa-user-o"></i> {{ list.author }}</p>
