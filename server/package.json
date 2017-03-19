@@ -1,0 +1,22 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "6.13.2",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-es2015-node6": "0.3.0",
+    "babel-preset-stage-3": "6.5.0",
+    "body-parser": "^1.17.1",
+    "eventproxy": "^0.3.5",
+    "express": "^4.15.2",
+    "music-api": "^0.2.7",
+    "superagent": "^3.5.1"
+  }
+}

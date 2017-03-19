@@ -2,38 +2,38 @@
 	<div id="play">
 		<MessageBox v-if="hasMessage" :mes="message"></MessageBox>
 		<!-- <audio id="audio" :src="songAddress"></audio> -->
-		<img :src="$store.state.audio.playList[0].songCover">
+		<img :src="cover">
 		<div class="mask"></div>
 		<div class="top-control">
 			<i class="fa fa-angle-left" aria-hidden="true" @click="$router.go(-1)"></i>
 			<div class="song-mes">
-				<p>{{ $store.state.audio.playList[0].name }}</p>
-				<p>{{ $store.state.audio.playList[0].author }}</p>
+				<p>{{ name }}</p>
+				<p>{{ author }}</p>
 			</div>
 		</div>
 		<div class="song">
-			<img :src="$store.state.audio.playList[0].songCover">
+			<img :src="cover">
 			<div class="lyric">
-				<div class="lyric-item" v-for="item in $store.state.audio.playList[0].lyric.lyricArr">
+				<div class="lyric-item" v-for="item in lyric.lyricArr">
 					<p>{{ item }}</p>
 				</div>
 			</div>
 		</div>
 		<div class="hand-audio">
 			<span id="now-time">{{ nowTime }}</span>
-			<div id="time-axis-all"></div>
-			<div id="time-axis-now"></div>
+			<div id="time-axis-all" @click="changeProgress"></div>
+			<div id="time-axis-now" @click="changeProgress"></div>
 			<div id="time-ball"></div>
-			<span id="all-time">{{ $store.state.audio.playList[0].allTime }}</span>
+			<span id="all-time">{{ allTime }}</span>
 		</div>
 		<div class="bottom-control">
 			<i class="fa fa-random" aria-hidden="true" v-if="playWay == 'random'" @click="changeStatus('random')"></i>
 			<i class="fa fa-rotate-right" aria-hidden="true" v-if="playWay == 'listCircle'" @click="changeStatus('listCircle')"></i>
 			<i class="fa fa-history" aria-hidden="true" v-if="playWay == 'singleCircle'" @click="changeStatus('singleCircle')"></i>
-			<i class="fa fa-step-backward" aria-hidden="true"></i>
+			<i class="fa fa-step-backward" aria-hidden="true" @click="lastSong"></i>
 			<i class="fa fa-pause-circle-o" aria-hidden="true" @click="pauseAndPlay" v-if="playSatus == 'play'"></i>
 			<i class="fa fa-play-circle-o" aria-hidden="true" @click="pauseAndPlay" v-if="playSatus == 'paused'"></i>
-			<i class="fa fa-step-forward" aria-hidden="true"></i>
+			<i class="fa fa-step-forward" aria-hidden="true" @click="nextSong"></i>
 			<i class="fa fa-list-ul" aria-hidden="true"></i>
 		</div>
 	</div>
@@ -47,21 +47,17 @@
 		mounted: function() {
 			var _this = this;
 			this.nowTime = this.$store.state.audio.nowTime;
+			this.progressAndLyric();
 			this.playSatus = this.$store.state.audio.playStatus;
 			setTimeout(function circle() {
 				try {
-					if(!document.getElementsByTagName('audio')[0].ended && _this.playSatus == 'play') {
+					if(document.getElementsByTagName('audio')[0].ended) {
+						_this.nowTime = "00:00";
+					}
+					if(_this.playSatus == 'play') {
 						_this.nowTime = dealTime.changeNowtime(_this.nowTime);
-						console.log(_this.nowTime);
-						let distance = dealTime.calDistance(_this.nowTime, _this.$store.state.audio.playList[0].allTime);
-						//console.log(distance);
-						document.getElementById('time-ball').style.left = 7.5 + distance + 'rem';
-						document.getElementById('time-axis-now').style.width = distance + 'rem';
-						var sliceDis = dealTime.lyricMove(_this.$store.state.audio.playList[0].lyric.timeArr, _this.nowTime);
-						for(var i = 0; i < document.getElementsByClassName('lyric-item').length; i++) {
-							//console.log(i);
-							document.getElementsByClassName('lyric-item')[i].style.transform = 'translateY(' + (-sliceDis) + 'rem)';
-						}						
+						//console.log(_this.nowTime);
+						_this.progressAndLyric();
 					}
 					setTimeout(circle, 1000);
 				}
@@ -72,40 +68,84 @@
 		},
 		data: () => {
 			return {
+				nowTime : '00:00',
 				playWay : 'random',
-				nowTime: '',
-				playSatus: 'play',
+				playSatus: '',
 				hasMessage: false,
 				message: ''
+			}
+		},
+		computed: {
+			name () {
+				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].name;
+			},
+			author () {
+				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].author;
+			},
+			allTime () {
+				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].allTime;
+			},
+			lyric (){
+				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].lyric;
+			},
+			cover () {
+				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].songCover;
 			}
 		},
 		components: {
 			MessageBox
 		},
 		methods: {
+			changeProgress: function(event) {
+				// console.log(event.pageX);
+				// console.log(document.getElementById('time-axis-all').style);
+			},	
+			lastSong: function() {
+
+			},
+			nextSong: function() {
+				// this.playSatus = 'paused';
+				this.nowTime = '00:00';
+				document.getElementById('time-ball').style.left = '7.5rem';
+				document.getElementById('time-axis-now').style.width = '0';
+				this.$emit('nextSong');
+			},
 			pauseAndPlay: function() {
 				let audio = document.getElementsByTagName('audio')[0];
 				if(audio.paused) {
 					audio.play();
 					this.playSatus = 'play';
+					this.$store.commit('changePlayStatus', 'play');
 				}
 				else {
 					audio.pause();
 					this.playSatus = 'paused';
+					this.$store.commit('changePlayStatus', 'paused');
 				}
 			},
 			changeStatus : function(status) {
 				this.hasMessage = true;
 				switch(status) {
-					case 'random': this.playWay = 'listCircle'; this.message = '列表循环'; break;
-					case 'listCircle': this.playWay = 'singleCircle'; this.message = '单曲循环'; break;
-					case 'singleCircle': this.playWay = 'random'; this.message = '随机播放'; break;
+					case 'random': this.playWay = 'listCircle'; this.$store.commit('changePlayWay', 'listCircle'); this.message = '列表循环'; break;
+					case 'listCircle': this.playWay = 'singleCircle'; this.$store.commit('changePlayWay', 'singleCircle'); this.message = '单曲循环'; break;
+					case 'singleCircle': this.playWay = 'random'; this.$store.commit('changePlayWay', 'random'); this.message = '随机播放'; break;
 					default: break;
 				}
 				var _this = this;
 				setTimeout(function() {
 					_this.hasMessage = false;
 				}, 2000);
+			},
+			progressAndLyric: function() {
+				let distance = dealTime.calDistance(this.nowTime, this.allTime);
+				//console.log(distance);
+				document.getElementById('time-ball').style.left = 7.5 + distance + 'rem';
+				document.getElementById('time-axis-now').style.width = distance + 'rem';
+				var sliceDis = dealTime.lyricMove(this.lyric.timeArr, this.nowTime);
+				for(var i = 0; i < document.getElementsByClassName('lyric-item').length; i++) {
+					//console.log(i);
+					document.getElementsByClassName('lyric-item')[i].style.transform = 'translateY(' + (-sliceDis) + 'rem)';
+				}	
 			}
 		}
 	}

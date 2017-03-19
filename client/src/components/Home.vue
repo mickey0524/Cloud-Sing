@@ -23,7 +23,7 @@
 			</ul>
 		</nav>
 		<transition enter-active-class="animated slideInLeft">
-			<router-view></router-view>
+			<router-view @beginPlay="beginplay"></router-view>
 		</transition>
 		<div class="bottom-control">
 			<div class="search active">		
@@ -116,6 +116,9 @@
 						_this.hasMessage = false;
 					}, 2000);
 				}
+			},
+			beginplay: function(songAddress) {
+				this.$emit('beginPlay', songAddress);
 			}
 		}
 	}
