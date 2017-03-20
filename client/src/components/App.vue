@@ -37,27 +37,35 @@
                     }
                 }, 1000 / 60);
             },
-            nextSong: function() {
-               //document.getElementsByTagName('audio')[0].pause();
+            nextSong: function(direction) {
                 this.$store.commit('changeNowTime', '00:00');
                 let index;
                 if(this.$store.state.audio.playWay == 'singleCircle') {
-                    console.log('asd');
                     document.getElementsByTagName('audio')[0].currentTime = '0';
+                    document.getElementsByTagName('audio')[0].play();
                 }
                 else {
                     if(this.$store.state.audio.playWay == 'random') {
                         index = Math.floor(Math.random() * this.$store.state.audio.playList.length);
                     }
                     else {
-                        index = (this.$store.state.audio.playIndex + 1) % this.$store.state.audio.playList.length;
+                        if(direction == 'right') {
+                            index = (this.$store.state.audio.playIndex + 1) % this.$store.state.audio.playList.length;
+                        }
+                        else {
+                            index = (this.$store.state.audio.playIndex - 1) % this.$store.state.audio.playList.length;
+                            if(index < 0) {
+                                index += this.$store.state.audio.playList.length;
+                            }
+                        }
                     }
                     if(this.$store.state.audio.playIndex == index) {
                         document.getElementsByTagName('audio')[0].currentTime = '0';
+                        document.getElementsByTagName('audio')[0].play();
                     }
                     else {
                         this.$store.commit('changePlayIndex', index);
-                        this.beginPlay(this.$store.state.audio.playList[index].songAddress);                      
+                        this.beginPlay(this.$store.state.audio.playList[index].songAddress);                    
                     }
                 }
             }

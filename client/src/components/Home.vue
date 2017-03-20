@@ -23,7 +23,7 @@
 			</ul>
 		</nav>
 		<transition enter-active-class="animated slideInLeft">
-			<router-view @beginPlay="beginplay"></router-view>
+			<router-view @beginPlay="beginplay" @nextSong="nextSong"></router-view>
 		</transition>
 		<div class="bottom-control">
 			<div class="search active">		
@@ -119,6 +119,9 @@
 			},
 			beginplay: function(songAddress) {
 				this.$emit('beginPlay', songAddress);
+			},
+			nextSong: function(direction) {
+				this.$emit('nextSong', direction);
 			}
 		}
 	}

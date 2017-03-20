@@ -30,10 +30,10 @@
 			<i class="fa fa-random" aria-hidden="true" v-if="playWay == 'random'" @click="changeStatus('random')"></i>
 			<i class="fa fa-rotate-right" aria-hidden="true" v-if="playWay == 'listCircle'" @click="changeStatus('listCircle')"></i>
 			<i class="fa fa-history" aria-hidden="true" v-if="playWay == 'singleCircle'" @click="changeStatus('singleCircle')"></i>
-			<i class="fa fa-step-backward" aria-hidden="true" @click="lastSong"></i>
+			<i class="fa fa-step-backward" aria-hidden="true" @click="nextSong('left')"></i>
 			<i class="fa fa-pause-circle-o" aria-hidden="true" @click="pauseAndPlay" v-if="playSatus == 'play'"></i>
 			<i class="fa fa-play-circle-o" aria-hidden="true" @click="pauseAndPlay" v-if="playSatus == 'paused'"></i>
-			<i class="fa fa-step-forward" aria-hidden="true" @click="nextSong"></i>
+			<i class="fa fa-step-forward" aria-hidden="true" @click="nextSong('right')"></i>
 			<i class="fa fa-list-ul" aria-hidden="true"></i>
 		</div>
 	</div>
@@ -46,17 +46,15 @@
 	export default {
 		mounted: function() {
 			var _this = this;
-			this.nowTime = this.$store.state.audio.nowTime;
 			this.progressAndLyric();
 			this.playSatus = this.$store.state.audio.playStatus;
+			this.offsetLeft = parseInt(document.getElementById('time-axis-all').offsetLeft);
+			this.progressWidth = parseInt(document.getElementById('time-axis-all').offsetWidth);
 			setTimeout(function circle() {
 				try {
-					if(document.getElementsByTagName('audio')[0].ended) {
-						_this.nowTime = "00:00";
-					}
 					if(_this.playSatus == 'play') {
-						_this.nowTime = dealTime.changeNowtime(_this.nowTime);
-						//console.log(_this.nowTime);
+						let time = dealTime.changeNowtime(_this.nowTime)
+						_this.$store.commit('changeNowTime', time);
 						_this.progressAndLyric();
 					}
 					setTimeout(circle, 1000);
@@ -68,11 +66,12 @@
 		},
 		data: () => {
 			return {
-				nowTime : '00:00',
 				playWay : 'random',
 				playSatus: '',
 				hasMessage: false,
-				message: ''
+				message: '',
+				offsetLeft: '',
+				progressWidth: ''
 			}
 		},
 		computed: {
@@ -80,7 +79,7 @@
 				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].name;
 			},
 			author () {
-				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].author;
+				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].singer;
 			},
 			allTime () {
 				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].allTime;
@@ -90,6 +89,9 @@
 			},
 			cover () {
 				return this.$store.state.audio.playList[this.$store.state.audio.playIndex].songCover;
+			},
+			nowTime () {
+				return this.$store.state.audio.nowTime;
 			}
 		},
 		components: {
@@ -97,18 +99,17 @@
 		},
 		methods: {
 			changeProgress: function(event) {
-				// console.log(event.pageX);
-				// console.log(document.getElementById('time-axis-all').style);
+				let nowWidth = parseInt(event.pageX) - this.offsetLeft;
+				let time = dealTime.clickProgress(nowWidth, this.progressWidth, this.allTime);
+				this.$store.commit('changeNowTime', time[0]);
+				this.progressAndLyric();
+				document.getElementsByTagName('audio')[0].currentTime = time[1];
 			},	
-			lastSong: function() {
-
-			},
-			nextSong: function() {
-				// this.playSatus = 'paused';
-				this.nowTime = '00:00';
+			nextSong: function(direction) {
+				this.$store.commit('changeNowTime', '00:00');
 				document.getElementById('time-ball').style.left = '7.5rem';
 				document.getElementById('time-axis-now').style.width = '0';
-				this.$emit('nextSong');
+				this.$emit('nextSong', direction);
 			},
 			pauseAndPlay: function() {
 				let audio = document.getElementsByTagName('audio')[0];
@@ -138,12 +139,10 @@
 			},
 			progressAndLyric: function() {
 				let distance = dealTime.calDistance(this.nowTime, this.allTime);
-				//console.log(distance);
 				document.getElementById('time-ball').style.left = 7.5 + distance + 'rem';
 				document.getElementById('time-axis-now').style.width = distance + 'rem';
 				var sliceDis = dealTime.lyricMove(this.lyric.timeArr, this.nowTime);
 				for(var i = 0; i < document.getElementsByClassName('lyric-item').length; i++) {
-					//console.log(i);
 					document.getElementsByClassName('lyric-item')[i].style.transform = 'translateY(' + (-sliceDis) + 'rem)';
 				}	
 			}

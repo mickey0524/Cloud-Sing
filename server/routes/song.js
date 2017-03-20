@@ -16,7 +16,7 @@ router.post('/getSongMes', bodyParser.json(), (req, res) => {
         });
     });
     musicAPI.getSong('netease', {
-        id: req.body.songId,
+        id: String(req.body.songId),
         raw: false
     })
     .then((response) => {

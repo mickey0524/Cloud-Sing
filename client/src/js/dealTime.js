@@ -51,6 +51,18 @@ exports.getNowTime = function(second) {
 }
 
 /**
+ * 点击进度条计算当前时间
+ */
+exports.clickProgress = function(nowWidth, allWidth, allTime) {
+	allTime = allTime.split(':');
+	let allSecond = parseInt(allTime[0]) * 60 + parseInt(allTime[1]);
+	let nowTime = parseInt(allSecond * (nowWidth / allWidth));
+	let minute = addZero(parseInt(nowTime / 60));
+	let second = addZero(nowTime % 60);
+	return [ minute + ':' + second, nowTime ];
+}
+
+/**
  * 给数字加上前导零
  */
 function addZero(num) {

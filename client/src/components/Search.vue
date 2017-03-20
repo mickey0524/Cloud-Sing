@@ -59,6 +59,34 @@
 						album: '叶惠美',
 						songId: '186001',
 						isAdd: false
+					},
+					{
+						singer: '玄殇',
+						name: '陌上花开',
+						alnum: '天涯明月刀相关歌曲',
+						songId: '420400798',
+						isAdd: false
+					},
+					{
+						singer: '孙晔/喵☆酱',
+						name: '天涯',
+						alnum: '热门华语244',
+						songId: '29567104',
+						isAdd: false						
+					},
+					{
+						singer: '银临/云の泣',
+						name: '锦鲤抄',
+						alnum: '锦鲤抄',
+						songId: '28138493',
+						isAdd: false							
+					},
+					{
+						singer: '银临/慕寒',
+						name: '东风志',
+						alnum: '东风志',
+						songId: '435306744',
+						isAdd: false						
 					}
 				],
 				hasMessage: false,
@@ -73,6 +101,11 @@
 				if(!this.songList[index].isAdd) {
 					let resource = this.$resource('http://localhost:3000/getSongMes');
 					let _this = this;
+					_this.message = '添加到播放列表';
+					_this.hasMessage = true;
+					setTimeout(function() {
+						_this.hasMessage = false;
+					}, 2000);
 					resource.save({ songId: this.songList[index].songId, songName: this.songList[index].name }).then((response) => {	
 						var song = {};
 						song.id = this.songList[index].songId;
@@ -84,15 +117,10 @@
 						song.songAddress = response.body.songAddress;
 						_this.$store.commit('addToPlayList', song);
 						if(!_this.$store.state.audio.isPlaying || _this.$store.state.audio.playStatus == 'pause') {
-							_this.$store.commit('changePlayIndex', 0);
+							_this.$store.commit('changePlayIndex', _this.$store.state.audio.playList.length - 1);
 							_this.$emit('beginPlay', response.body.songAddress);
 						}
-						_this.message = '添加到播放列表';
-						_this.hasMessage = true;
 						_this.songList[index].isAdd = true;
-						setTimeout(function() {
-							_this.hasMessage = false;
-						}, 2000);
 					})
 					.catch((err) => {
 						console.log(err);

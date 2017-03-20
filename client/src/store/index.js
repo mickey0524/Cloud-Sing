@@ -32,7 +32,8 @@ export default new Vuex.Store({
 			playStatus: 'paused',  //播放还是暂停
 			playWay: 'random', //代表播放模式
 			playIndex: 0 //代表当前audio内在播放playList中索引为playIndex的歌曲
-		}
+		},
+		detail: {}
 	},
 	mutations: {
 		routeToHomeChild (state, child) {
@@ -56,6 +57,9 @@ export default new Vuex.Store({
 		},
 		changePlayWay (state, way) {
 			state.audio.playWay = way;
+		},
+		setDetail (state, detail) {
+			state.detail = detail;
 		}
 	}
 });
