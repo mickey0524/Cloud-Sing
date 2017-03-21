@@ -10,7 +10,7 @@
 		border-left: .4rem solid #EA0606;
 	}
 	.album-list {
-		max-height: 82rem;
+		max-height: 91rem;
 		overflow: scroll;
 		width: 100%;
 		display: block;
@@ -32,12 +32,12 @@
 
 @media only screen and (min-device-width: 768px) {
 	.album-list {
-		height: 56rem;
+		height: 63rem;
 	}
 }
 
 @media only screen and (min-device-width: 1024px) {
 	.album-list {
-		height: 60rem;
+		height: 67rem;
 	}
 }

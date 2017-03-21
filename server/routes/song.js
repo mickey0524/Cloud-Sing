@@ -21,6 +21,7 @@ router.post('/getSongMes', bodyParser.json(), (req, res) => {
     })
     .then((response) => {
         let address = response.url;
+        console.log('address');
         ep.emit('address', address);
     })
     .catch((err) => { console.log(err); })
@@ -28,6 +29,7 @@ router.post('/getSongMes', bodyParser.json(), (req, res) => {
     superagent.get(addresUrl)
         .end(function(err, result) {
             if(!err) {
+
                 let obj = JSON.parse(result.text);
                 let duration = obj['songs'][0].duration;
                 ep.emit('duration', duration);
@@ -42,10 +44,9 @@ router.post('/getSongMes', bodyParser.json(), (req, res) => {
                 ep.emit('lyric', lyric);
             }
         })
-        // console.log(req.body.songName);
     musicAPI.searchSong('netease', {
         key: req.body.songName,
-        limit: 10,
+        limit: 20,
         page: 1,
     })
     .then((response) => { 
@@ -55,10 +56,41 @@ router.post('/getSongMes', bodyParser.json(), (req, res) => {
                 ep.emit('cover', cover);
                 break;
             }
+            if(i == response.songList[i].length - 1) {
+                cover = response.songList[0].album.coverBig;
+                ep.emit('cover', cover);
+            }
         }    
     })
     .catch((err) => { console.log(err); })
 });
+
+router.post('/searchSong', bodyParser.json(), (req, res) => {
+    musicAPI.searchSong('netease', {
+        key: req.body.searchContent,
+        limit: 20,
+        page: 1,
+        raw: false
+    })
+    .then((response) => {
+        let result = [];
+        for(var i in response.songList) {
+            let singer = '';
+            for(var j in response.songList[i].artists) {
+                singer += response.songList[i].artists[j].name + '/';
+            }
+            result.push({
+                singer: singer.slice(0, singer.length - 1),
+                name: response.songList[i].name,
+                album: response.songList[i].album.name,
+                songId: response.songList[i].id,
+                isAdd: false
+            });
+        }
+        res.send(result);
+    })  
+    .catch((err) => { console.log(err) });
+})
 
 function changeTime(time) {
     time = parseInt(time / 1000);

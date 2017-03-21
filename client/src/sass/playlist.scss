@@ -10,7 +10,7 @@
 		border-left: .4rem solid #EA0606;
 	}
 	.playlist-list {
-		max-height: 82rem;
+		max-height: 90rem;
 		overflow: scroll;
 		width: 100%;
 		display: block;
@@ -43,12 +43,12 @@
 
 @media only screen and (min-device-width: 768px) {
 	.playlist-list {
-		height: 56rem;
+		height: 63rem;
 	}
 }
 
 @media only screen and (min-device-width: 1024px) {
 	.playlist-list {
-		height: 60rem;
+		height: 66.5rem;
 	}
 }

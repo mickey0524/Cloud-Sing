@@ -2,7 +2,7 @@
     <div id="app">
         <audio :src="songAddress"></audio>
         <transition enter-active-class="animated fadeIn" mode="out-in">
-            <router-view @beginPlay="beginPlay" @nextSong="nextSong"></router-view>
+            <router-view @beginPlay="beginPlay" @nextSong="nextSong" @changeSong="changeSong" @deleteSong="deleteSong"></router-view>
         </transition>
     </div>
 </template>
@@ -68,6 +68,21 @@
                         this.beginPlay(this.$store.state.audio.playList[index].songAddress);                    
                     }
                 }
+            },
+            changeSong: function(index) {
+                this.$store.commit('changePlayIndex', index);
+                this.beginPlay(this.$store.state.audio.playList[index].songAddress);  
+            },
+            deleteSong: function(index) {
+                //console.log('asd');
+                // let nextSong = (index + 1) % this.$store.state.audio.playList.length;
+                //console.log(nextSong);
+                if(index == this.$store.state.audio.playList.length - 1) {
+                    index = 0;
+                    this.$store.commit('changePlayIndex', index);
+                }
+                this.$store.commit('deleteSong', index);
+                this.beginPlay(this.$store.state.audio.playList[index].songAddress);  
             }
         }
     }

@@ -33,4 +33,20 @@ router.post('/getSinger', bodyParser.json(), (req, res) => {
     .catch((err) => { console.log(err); })
 })
 
+router.post('/searchSinger', bodyParser.json(), (req, res) => {
+    musicAPI.searchSong('netease', {
+        key: req.body.searchContent,
+        limit: 2,
+        page: 1
+    })
+    .then((response) => {
+       // console.log(response);
+        res.send([{
+            name: req.body.searchContent,
+            avatar: response.songList[0].album.coverSmall
+        }]);
+    })
+    .catch((err) => console.log(err))
+});
+
 module.exports = router;

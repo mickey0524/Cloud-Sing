@@ -1,12 +1,13 @@
 <template>
 	<div>
-		<!-- <Loading></Loading> -->
+		<Loading v-if="loading"></Loading>
 		<MessageBox v-if="hasMessage" :mes="message"></MessageBox>
 		<div class="top-control">
 			<div class="logo">
 				<i class="fa fa-music" aria-hidden="true"></i>
 			</div>
-			<input type="text" id="search" placeholder="搜索音乐、歌单、歌手、专辑">
+			<input type="text" id="search" placeholder="搜索音乐、歌单、歌手、专辑" v-model="searchContent"  @keyup.enter="search">
+			<!-- <button style="display: none" @keyup.enter="search">搜索</button> -->
 			<div class="play-flag" :class="{'active' : playStatus}" @click="routeToPlay">
 				<span></span>
 				<span></span>
@@ -25,7 +26,7 @@
 		<transition enter-active-class="animated slideInLeft">
 			<router-view @beginPlay="beginplay" @nextSong="nextSong"></router-view>
 		</transition>
-		<div class="bottom-control">
+<!-- 		<div class="bottom-control">
 			<div class="search active">		
 				<i class="fa fa-headphones" aria-hidden="true"></i>
 				<span>发现</span>
@@ -38,7 +39,7 @@
 				<i class="fa fa-home" aria-hidden="true"></i>
 				<span>账号</span>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
@@ -75,7 +76,9 @@
 				// currentPage: 'search',
 				// isPlaying: this.$store.state.audio.isPlaying,
 				hasMessage: false,
-				message: ''
+				message: '',
+				searchContent: '',
+				loading: false
 			}
 		},
 		computed: {
@@ -122,6 +125,24 @@
 			},
 			nextSong: function(direction) {
 				this.$emit('nextSong', direction);
+			},
+			search: function() {
+				let page = this.$route.path;
+				let resource;
+				let _this = this;
+				switch(page) {
+					case '/' : resource = this.$resource('http://localhost:3000/searchSong'); break;
+					case '/playlist' : resource = this.$resource('http://localhost:3000/searchPlaylist'); break;
+					case '/singer' : resource = this.$resource('http://localhost:3000/searchSinger'); break;
+					case '/album' : resource = this.$resource('http://localhost:3000/searchAlbum'); break; 
+					default: break;
+				}
+				this.loading = true;
+				resource.save({ searchContent : this.searchContent }).then((response) => {
+					_this.$children[0].search(response.body);
+					_this.loading = false;
+				})
+				.catch((err) => { console.log(err); })
 			}
 		}
 	}

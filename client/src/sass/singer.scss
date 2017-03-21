@@ -4,7 +4,7 @@
 	.singer-list {
 		@include flexbox();
 		flex-direction: column;
-		max-height: 88rem;
+		max-height: 96rem;
 		overflow: scroll;
 		.singer-item {
 			margin: 0 1rem;
@@ -31,12 +31,12 @@
 
 @media only screen and (min-device-width: 768px) {
 	.singer-list {
-		height: 60rem;
+		height: 69rem;
 	}
 }
 
 @media only screen and (min-device-width: 1024px) {
 	.singer-list {
-		height: 64.5rem;
+		height: 73rem;
 	}
 }

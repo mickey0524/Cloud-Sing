@@ -32,4 +32,24 @@ router.post('/getAlbum', bodyParser.json(), (req, res) => {
     .catch((err) => { console.log(err); })
 });
 
+router.post('/searchAlbum', bodyParser.json(), (req, res) => {
+    musicAPI.searchAlbum('netease', {
+        key: req.body.searchContent,
+        limit: 8,
+        page: 1
+    })
+    .then((response) => {
+        let result = [];
+        for(var i in response.albumList) {
+            result.push({
+                name: response.albumList[i].name,
+                cover: response.albumList[i].coverBig,
+                albumId: response.albumList[i].id
+            });
+        }
+        res.send(result);
+    })
+    .catch((err) => console.log(err))
+})
+
 module.exports = router;

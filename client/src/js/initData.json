@@ -1,0 +1,140 @@
+{
+	"songList" : [
+		{
+			"singer" : "周杰伦",
+			"name": "告白气球",
+			"album": "周杰伦的床边故事",
+			"songId": "418603077",
+			"isAdd": false
+		},
+		{
+			"singer" : "周杰伦",
+			"name": "红尘客栈",
+			"album": "十二星座",
+			"songId": "25641368",
+			"isAdd": false
+		},
+		{
+			"singer" : "周杰伦",
+			"name": "七里香",
+			"album": "叶惠美",
+			"songId": "186001",
+			"isAdd": false
+		},
+		{
+			"singer": "玄殇",
+			"name": "陌上花开",
+			"alnum": "天涯明月刀相关歌曲",
+			"songId": "420400798",
+			"isAdd": false
+		},
+		{
+			"singer": "孙晔/喵☆酱",
+			"name": "天涯",
+			"alnum": "热门华语244",
+			"songId": "29567104",
+			"isAdd": false						
+		},
+		{
+			"singer": "银临/云の泣",
+			"name": "锦鲤抄",
+			"alnum": "锦鲤抄",
+			"songId": "28138493",
+			"isAdd": false							
+		},
+		{
+			"singer": "银临/慕寒",
+			"name": "东风志",
+			"alnum": "东风志",
+			"songId": "435306744",
+			"isAdd": false						
+		}
+	],
+	"playList" : [
+		{
+			"cover" : "https://p3.music.126.net/9igIxyAEGyWW35H6qxStew==/7713074069619085.jpg?param=400y400",
+			"name" : "周杰伦",
+			"author" : "风动云动",
+			"playlistId": "70269414"
+		},
+		{
+			"cover" : "https://p4.music.126.net/BvyL9PIrr9Te_zNETctYaQ==/3419481170032175.jpg?param=400y400",
+			"name" : "☾歌手☽周杰伦",
+			"author" : "飒然风影",
+			"playlistId": "377261935"
+		},
+		{
+			"cover" : "https://p4.music.126.net/XrDN8PC8wrWBaLYUko1LPg==/1400777815583105.jpg?param=400y400",
+			"name" : "林俊杰最全歌曲合辑",
+			"author" : "VeeLau",
+			"playlistId": "172276778"
+		},
+		{
+			"cover" : "https://p4.music.126.net/J9amdumIvLVTYi2hpKghrA==/7947270046270086.jpg?param=400y400",
+			"name" : "薛之谦",
+			"author" : "郑ab",
+			"playlistId": "1909092"
+		},
+		{
+			"cover" : "https://p3.music.126.net/uAL5qDUsMlJOwnAlEmgu-Q==/18601537720493144.jpg?param=400y400",
+			"name" : "幽幽古风 音拂心田",
+			"author" : "锦瑟浮生",
+			"playlistId": "593705618"
+		},
+		{
+			"cover" : "https://p.qpic.cn/music_cover/ZDzylthJUx5Iia2n1lmQhrZZZlyz7vBQcv69QGwgEHPupm30GVVialdg/600",
+			"name" : "古风之韵，淡薄之境",
+			"author" : "荼蘼花事了",
+			"playlistId": "360644327"
+		}
+	],
+	"singerList" : [
+		{
+			"name" : "周杰伦",
+			"avatar" : "https://p4.music.126.net/cUTk0ewrQtYGP2YpPZoUng==/3265549553028224.jpg?param=140y140"
+		},
+		{
+			"name" : "林俊杰",
+			"avatar" : "https://p3.music.126.net/WDtmDgph6NKuKNbiwTDXHw==/18362943695761234.jpg?param=140y140"
+		},
+		{
+			"name" : "萧敬腾",
+			"avatar" : "https://p4.music.126.net/kM0bdmhoJwtjx6PV5A3T1A==/91259465118157.jpg?param=140y140"
+		},
+		{
+			"name" : "田馥甄",
+			"avatar" : "https://p4.music.126.net/3u-hAcxthaMpLaNvA9KJmg==/6038517860296999.jpg?param=140y140"
+		},
+		{
+			"name" : "薛之谦",
+			"avatar" : "https://p3.music.126.net/4-1tot-c9uW1qzeGMc0CQQ==/19217264230279490.jpg?param=140y140"
+		}
+	],
+	"albumList" : [
+		{
+			"name" : "周杰伦的床边故事",
+			"cover" : "https://p3.music.126.net/cUTk0ewrQtYGP2YpPZoUng==/3265549553028224.jpg?param=400y400",
+			"albumId": "34720827"
+		},
+		{
+			"name" : "七里香",
+			"cover" : "https://p4.music.126.net/P1goeQ7SoxEkFsb4ZDijMw==/7746059418324672.jpg?param=400y400",
+			"albumId": "18903"
+		},
+		{
+			"name" : "十一月的萧邦",
+			"cover" : "https://p4.music.126.net/J8AsjYfu2Ugr7Q4ub0Yv0Q==/43980465123047.jpg?param=400y400",
+			"albumId": "18896"
+		},
+		{
+			"name" : "几个薛之谦",
+			"cover" : "https://p3.music.126.net/GbD4EIwWeeQlO65jsDzywA==/60473139533044.jpg?param=400y400",
+			"albumId": "17072"
+		},
+		{
+			"name" : "和自己对话",
+			"cover" : "https://p4.music.126.net/CKcTyKux_UTt0sO_5VWR9w==/16561943649388272.jpg?param=400y400",
+			"albumId": "3438282"
+		}
+	]
+}

@@ -1,6 +1,7 @@
 <template>
 	<div id="play">
 		<MessageBox v-if="hasMessage" :mes="message"></MessageBox>
+		<List v-if="checkList" @close="checkList = false;" @changeSong="listChangeSong" @deleteSong="deleteSong"></List>
 		<!-- <audio id="audio" :src="songAddress"></audio> -->
 		<img :src="cover">
 		<div class="mask"></div>
@@ -34,7 +35,7 @@
 			<i class="fa fa-pause-circle-o" aria-hidden="true" @click="pauseAndPlay" v-if="playSatus == 'play'"></i>
 			<i class="fa fa-play-circle-o" aria-hidden="true" @click="pauseAndPlay" v-if="playSatus == 'paused'"></i>
 			<i class="fa fa-step-forward" aria-hidden="true" @click="nextSong('right')"></i>
-			<i class="fa fa-list-ul" aria-hidden="true"></i>
+			<i class="fa fa-list-ul" aria-hidden="true" @click="checkList = true;"></i>
 		</div>
 	</div>
 </template>
@@ -43,6 +44,7 @@
 	import dealLyric from '../js/dealLyric.js'
 	import dealTime from '../js/dealTime.js'
 	import MessageBox from './MessageBox.vue'
+	import List from './List.vue'
 	export default {
 		mounted: function() {
 			var _this = this;
@@ -66,12 +68,13 @@
 		},
 		data: () => {
 			return {
-				playWay : 'random',
+				// playWay : 'random',
 				playSatus: '',
 				hasMessage: false,
 				message: '',
 				offsetLeft: '',
-				progressWidth: ''
+				progressWidth: '',
+				checkList: false
 			}
 		},
 		computed: {
@@ -92,12 +95,22 @@
 			},
 			nowTime () {
 				return this.$store.state.audio.nowTime;
+			},
+			playWay () {
+				return this.$store.state.audio.playWay;
 			}
 		},
 		components: {
-			MessageBox
+			MessageBox,
+			List
 		},
 		methods: {
+			deleteSong: function(index) {
+				this.$emit('deleteSong', index);
+			},
+			listChangeSong: function(index) {
+				this.$emit('changeSong', index);
+			},
 			changeProgress: function(event) {
 				let nowWidth = parseInt(event.pageX) - this.offsetLeft;
 				let time = dealTime.clickProgress(nowWidth, this.progressWidth, this.allTime);
@@ -127,9 +140,9 @@
 			changeStatus : function(status) {
 				this.hasMessage = true;
 				switch(status) {
-					case 'random': this.playWay = 'listCircle'; this.$store.commit('changePlayWay', 'listCircle'); this.message = '列表循环'; break;
-					case 'listCircle': this.playWay = 'singleCircle'; this.$store.commit('changePlayWay', 'singleCircle'); this.message = '单曲循环'; break;
-					case 'singleCircle': this.playWay = 'random'; this.$store.commit('changePlayWay', 'random'); this.message = '随机播放'; break;
+					case 'random': this.$store.commit('changePlayWay', 'listCircle'); this.message = '列表循环'; break;
+					case 'listCircle': this.$store.commit('changePlayWay', 'singleCircle'); this.message = '单曲循环'; break;
+					case 'singleCircle': this.$store.commit('changePlayWay', 'random'); this.message = '随机播放'; break;
 					default: break;
 				}
 				var _this = this;

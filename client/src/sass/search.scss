@@ -1,82 +1,90 @@
 @import 'general';
 
-.banner{
-	position: relative;
-	width: 100%;
-	height: 20rem;
-	overflow: hidden;
-	.swipe-photos {
-		position: absolute;
-		width: calc(100% * 4);
-		.swipe-item {
+#search {
+	background: white;
+	.banner{
+		position: relative;
+		width: 100%;
+		height: 20rem;
+		overflow: hidden;
+		.swipe-photos {
 			position: absolute;
-			width: 25%;
-			height: 20rem;
-			img {
-				width: 100%;
+			width: calc(100% * 4);
+			.swipe-item {
+				position: absolute;
+				width: 25%;
 				height: 20rem;
+				img {
+					width: 100%;
+					height: 20rem;
+				}
 			}
-		}
-		.swipe-item:first-of-type {
-			animation: swipe_1 10s linear infinite;
-		}
-		.swipe-item:nth-of-type(2) {
-			animation: swipe_2 10s linear infinite;
-		}
-		.swipe-item:nth-of-type(3) {
-			animation: swipe_3 10s linear infinite;
-		}
-		.swipe-item:last-of-type {
-			animation: swipe_4 10s linear infinite;
+			.swipe-item:first-of-type {
+				animation: swipe_1 10s linear infinite;
+			}
+			.swipe-item:nth-of-type(2) {
+				animation: swipe_2 10s linear infinite;
+			}
+			.swipe-item:nth-of-type(3) {
+				animation: swipe_3 10s linear infinite;
+			}
+			.swipe-item:last-of-type {
+				animation: swipe_4 10s linear infinite;
+			}
 		}
 	}
-}
-     
-.song-list {
-	background: white;
-	font-size: 2rem;
-	width: 100%;
-	height: 69rem;
-	@include flexbox();
-	flex-direction: column;
-	overflow: scroll;
-	.song-item {
+	     
+	.song-list {
+		font-size: 2rem;
 		width: 100%;
-		margin-top: 2rem;
-		.number {
-			width: 8%;
-			text-align: center;
-			display: inline-block;
-			font-size: 4rem;
-			margin: 0 1rem;
-			vertical-align: middle;
-			color: #9F9F9F;
-		}
-		.song-mes {
-			width: 80%;
-			padding-left: 1rem;
-			vertical-align: middle;
-			display: inline-block;
-			padding-bottom: 1rem;
-			border-bottom: .15rem solid #CCCCCC;
-			p {
-				font-size: 2.5rem;
-			}
-			span {
+		height: 78rem;
+		@include flexbox();
+		flex-direction: column;
+		overflow: scroll;
+		.song-item {
+			width: 100%;
+			margin-top: 2rem;
+			.number {
+				width: 8%;
+				text-align: center;
+				display: inline-block;
+				font-size: 4rem;
+				margin: 0 1rem;
+				vertical-align: middle;
 				color: #9F9F9F;
+			}
+			.song-mes {
+				width: 80%;
+				padding-left: 1rem;
+				vertical-align: middle;
+				display: inline-block;
+				padding-bottom: 1rem;
+				border-bottom: .15rem solid #CCCCCC;
+				p {
+					font-size: 2.5rem;
+				}
+				span {
+					color: #9F9F9F;
+				}
 			}
 		}
 	}
 }
 
 @media only screen and (min-device-width: 768px) {
-	.song-list {
-		height: 42rem;
+	#search {
+		background: white;
+		.song-list {
+			height: 50.5rem;
+		}
 	}
 }
 
 @media only screen and (min-device-width: 1024px) {
-	.song-list {
-		height: 46rem;
+	#search {
+		background: white;
+		.song-list {
+			height: 54rem;
+		}
 	}
 }
