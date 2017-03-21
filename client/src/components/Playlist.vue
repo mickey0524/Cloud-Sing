@@ -1,6 +1,6 @@
 <template>
 	<div id="playlist">
-		<List></List>
+		<!-- <List></List> -->
 		<Loading v-if="loading"></Loading>
 		<h3>全部歌单</h3>
 		<div class="playlist-list">

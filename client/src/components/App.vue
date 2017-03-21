@@ -74,9 +74,6 @@
                 this.beginPlay(this.$store.state.audio.playList[index].songAddress);  
             },
             deleteSong: function(index) {
-                //console.log('asd');
-                // let nextSong = (index + 1) % this.$store.state.audio.playList.length;
-                //console.log(nextSong);
                 if(index == this.$store.state.audio.playList.length - 1) {
                     index = 0;
                     this.$store.commit('changePlayIndex', index);

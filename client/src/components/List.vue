@@ -100,6 +100,7 @@
 				}
 			},
 			deleteAll () {
+				let _this = this;
 				this.$store.commit('deleteAll');
 				this.message = '全部清空';
 				this.hasMessage = true;
