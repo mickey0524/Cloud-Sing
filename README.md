@@ -17,6 +17,7 @@
 **后端工具**
 
 * express
+* vscode
 * musicAPI
 
 后端我直接使用了musicAPI这个库，是cnode上一个大牛封装好的网易云接口，这是[其他可以参考的网易云接口](http://moonlib.com/606.html)。
@@ -51,6 +52,6 @@ git clone https://github.com/mickey0524/Cloud-Sing.git
 
 npm run build
 
-##License
+## License
 
 MIT
