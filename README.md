@@ -22,7 +22,7 @@
 
 后端我直接使用了musicAPI这个库，是cnode上一个大牛封装好的网易云接口，这是[其他可以参考的网易云接口](http://moonlib.com/606.html)。
 
-##目录结构
+## 目录结构
 
 > ![directory](./pic/directory_2.png)
 > ![directory](./pic/directory_1.png)
