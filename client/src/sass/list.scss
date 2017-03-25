@@ -26,6 +26,7 @@
 		padding: 0 2rem;
 		@include flexbox();
 		flex-direction: column;
+		overflow: scroll;
 		// justify-content: center;
 		.playList-item {
 			width: 100%;
