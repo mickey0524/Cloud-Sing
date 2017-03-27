@@ -40,7 +40,6 @@ router.post('/searchSinger', bodyParser.json(), (req, res) => {
         page: 1
     })
     .then((response) => {
-       // console.log(response);
         res.send([{
             name: req.body.searchContent,
             avatar: response.songList[0].album.coverSmall

@@ -1,0 +1,28 @@
+{
+  "name": "koa_server",
+  "version": "1.0.0",
+  "description": "koa2-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "async"
+  ],
+  "author": "baihao",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "6.13.2",
+    "babel-polyfill": "6.13.0",
+    "babel-preset-es2015-node6": "0.3.0",
+    "babel-preset-stage-3": "6.5.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "0.0.16",
+    "koa-router": "^7.1.0",
+    "music-api": "^0.2.7",
+    "superagent": "^3.5.1"
+  }
+}
