@@ -95,9 +95,10 @@
 				>img {
 					width: 5rem;
 					border-radius: 50%;
-					vertical-align: middle;
+					vertical-align: top;
 				}
 				p:last-of-type {
+					width: calc(100% - 6rem);
 					display: inline-block;
 				}
 			}
