@@ -35,7 +35,7 @@
 
 **克隆远程库**
 
-git clone https://github.com/mickey0524/Cloud-Sing.git
+git clone git@github.com/mickey0524/Cloud-Sing.git
 
 **安装前后端依赖**
 
