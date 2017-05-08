@@ -110,6 +110,9 @@
 			},
 			listChangeSong: function(index) {
 				this.$emit('changeSong', index);
+				this.$store.commit('changeNowTime', '00:00');
+				document.getElementById('time-ball').style.left = '7.5rem';
+				document.getElementById('time-axis-now').style.width = '0';
 			},
 			changeProgress: function(event) {
 				let nowWidth = parseInt(event.pageX) - this.offsetLeft;
